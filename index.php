@@ -23,47 +23,66 @@
         </form>
     </div><!-- header -->
     <div class="center">
-        <div class="pokemon">
+
         <div class="poke-card-img">
             <?php
-                function apiImg() //função para buscar os dados da API
-                {
-                    $url = "https://pokeapi.co/api/v2/pokemon/" . $_GET["id"]; //url da API
-                    $pokemon = json_decode(file_get_contents($url)); //transforma o json em um objeto
-                    echo "<img src='" . $pokemon->sprites->front_default . "'>";
-                }
-                apiImg();
-                ?>
-        </div><!-- poke-card-img -->
-        <div class="poke-card">
-            <?php
-            function api() //função para buscar os dados da API
+            function apiImg() //função para buscar os dados da API
             {
                 $url = "https://pokeapi.co/api/v2/pokemon/" . $_GET["id"]; //url da API
                 $pokemon = json_decode(file_get_contents($url)); //transforma o json em um objeto
-                echo "<h2>" . $pokemon->id . "</h2>";
-                echo "<h2>" . $pokemon->name . "</h2>";
-                echo "<h3>Altura: " . $pokemon->height . "</h3>";
-                echo "<h3>Peso: " . $pokemon->weight . "</h3>";
-                echo "<ul> <br>";
-                echo "<h3>Tipo</h2><br>";
-                foreach ($pokemon->types as $type) { //foreach para percorrer o array de tipos
-                    echo "<li>" . $type->type->name . "</li>";
-                }
-                echo "<ul> <br>";
-                echo "<h3>Habilidades</h2> <br>";
-                foreach ($pokemon->abilities as $ability) { //foreach para percorrer o array de habilidades
-                    echo "<li>" . $ability->ability->name . "</li>";
-                }
-                
-                
-                echo "</ul>";
+                echo "<img src='" . $pokemon->sprites->front_shiny . "'>";
             }
-
-            api();
+            apiImg();
             ?>
+        </div><!-- poke-card-img -->
+        <div class="poke-card">
+            <div class="geral">
+                <?php
+                function api() //função para buscar os dados da API
+                {
+                    $url = "https://pokeapi.co/api/v2/pokemon/" . $_GET["id"]; //url da API
+                    $pokemon = json_decode(file_get_contents($url)); //transforma o json em um objeto
+                    echo "<h2>".$pokemon->name ." N ". $pokemon->id . "</h2>";
+                    echo "<h3>Altura: " . $pokemon->height . "</h3>";
+                    echo "<h3>Peso: " . $pokemon->weight . "</h3>";
+                    echo "<ul> <br>";
+                }
+
+                api();
+                ?>
+            </div><!-- geral -->
+            <div class="tipo">
+                <?php
+                function apiTipo() //função para buscar os dados da API
+                {
+                    $url = "https://pokeapi.co/api/v2/pokemon/" . $_GET["id"]; //url da API
+                    $pokemon = json_decode(file_get_contents($url)); //transforma o json em um objeto
+                    foreach ($pokemon->types as $type) { //foreach para percorrer o array de tipos
+                        echo "<h2>Tipo</h2>";
+                        echo "<h3>" . $type->type->name . "</h3>";
+                    }
+                }
+                apiTipo();
+                ?>
+            </div><!-- tipo -->
+            <div class="habilidades">
+                <?php
+                function apiHabilidades() //função para buscar os dados da API
+                {
+                    $url = "https://pokeapi.co/api/v2/pokemon/" . $_GET["id"]; //url da API
+                    $pokemon = json_decode(file_get_contents($url)); //transforma o json em um objeto
+                    echo "<ul> <br>";
+                    echo "<ul> <br>";
+                    echo "<h3>Habilidades</h2><br>";
+                    foreach ($pokemon->abilities as $ability) { //foreach para percorrer o array de habilidades
+                        echo "<br><li>" . $ability->ability->name . "</li><br>";
+                    }
+                    echo "</ul>";
+                }
+                apiHabilidades();
+                ?>
+            </div><!-- habilidades -->
         </div><!-- poke-card -->
-        </div><!-- pokemon -->
     </div><!-- center -->
 </body>
 
